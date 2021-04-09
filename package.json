@@ -1,0 +1,30 @@
+{
+	"name": "mdbbcodeconversion-gui",
+	"version": "1.0.0",
+	"description": "live markdown to bbcode conversion gui",
+	"main": "app.ahk",
+	"dependencies": {
+		"neutron.ahk": "^0.1.0"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Chunjee/mdbbcodeconversion-gui.git"
+	},
+	"keywords": [
+		"ahk",
+		"markdown",
+		"bbcode",
+		"neutron.ahk",
+		"neutron"
+	],
+	"author": "Shawn Brooker",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Chunjee/mdbbcodeconversion-gui/issues"
+	},
+	"homepage": "https://github.com/Chunjee/mdbbcodeconversion-gui#readme"
+}
