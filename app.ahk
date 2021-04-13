@@ -19,7 +19,7 @@ neutron.Show()
 return
 
 
-fn_fieldChanged(neutron,event)
+fn_fieldChanged(neutron, event)
 {
 	; formData := neutron.qs("#input").value
 	formData := event.target.value
@@ -52,12 +52,12 @@ submit(neutron, event)
 {
 	; form will redirect the page by default, but we want to handle the form data ourself.
 	event.preventDefault()
-	
+
 	; Use Neutron's GetFormData method to process the form data into a form that
 	; is easily accessed. Fields that have a 'name' attribute will be keyed by
 	; that, or if they don't they'll be keyed by their 'id' attribute.
 	formData := neutron.GetFormData(event.target)
-	
+
 	; You can access all of the form fields by iterating over the FormData
 	; object. It will go through them in the order they appear in the HTML.
 	; out := ""
@@ -69,7 +69,7 @@ submit(neutron, event)
 	for name, value in formData
 		out .= value "`n"
 	out .= "`n"
-	
+
 	; You can also get field values by name directly. Use object dot notation
 	; with the field name/id.
 	; out .= "Email: " formData.inputEmail "`n"
@@ -87,7 +87,7 @@ submit(neutron, event)
 Convert(Post)
 {
 	Post := RegExReplace(Post, "`a)\R", "`r`n")
-	
+
 	; Pull out alternate sections
 	Alternatives := []
 	for Match, Ctx in new RegExMatchAll(Post, "sO)<!-- alternate[\s\R]+(.+?)[\s\R]+-->.+?<!-- /alternate -->")
@@ -96,7 +96,7 @@ Convert(Post)
 		Ctx.Replacement := "@@Alternate" A_Index "@@"
 	}
 	Post := Ctx.Haystack
-	
+
 	; Pull out code blocks
 	CodeBlocks := []
 	for Match, Ctx in new RegExMatchAll(Post, "sO)``````.*?\R(.+?)\R``````")
@@ -105,7 +105,7 @@ Convert(Post)
 		Ctx.Replacement := "@@CodeBlock" A_Index "@@"
 	}
 	Post := Ctx.Haystack
-	
+
 	; Pull out spoilers
 	Spoilers := []
 	for Match, Ctx in new RegExMatchAll(Post, "sO)<!-- spoiler -->(.+?)<!-- /spoiler -->")
@@ -114,25 +114,25 @@ Convert(Post)
 		Ctx.Replacement := "@@Spoiler" A_Index "@@"
 	}
 	Post := Ctx.Haystack
-	
+
 	; Parse each paragraph
 	Post := ParseBlocks(Post)
-	
+
 	; Restore spoilers
 	for Match, Ctx in new RegExMatchAll(Post, "O)@@Spoiler(\d+)@@")
 		Ctx.Replacement := "[spoiler]" ParseBlocks(Spoilers[Match[1]]) "[/spoiler]"
 	Post := Ctx.Haystack
-	
+
 	; Restore code block
 	for Match, Ctx in new RegExMatchAll(Post, "O)@@CodeBlock(\d+)@@")
 		Ctx.Replacement := "[code]" CodeBlocks[Match[1]] "[/code]"
 	Post := Ctx.Haystack
-	
+
 	; Restore alternatives
 	for Match, Ctx in new RegExMatchAll(Post, "O)@@Alternate(\d+)@@")
 		Ctx.Replacement := Alternatives[Match[1]]
 	Post := Ctx.Haystack
-	
+
 	return Trim(Post, "`r`n `t")
 }
 
@@ -144,13 +144,13 @@ class RegExMatchAll
 		this.Haystack := Haystack
 		this.Needle := Needle
 	}
-	
+
 	_NewEnum()
 	{
 		this.Pos := 0
 		return this
 	}
-	
+
 	Next(ByRef Match, ByRef Context)
 	{
 		if this.HasKey("Replacement")
@@ -193,21 +193,21 @@ ParseBlock(Post)
 		{
 			; Trim off list item marker
 			Line := RegExReplace(Lines.RemoveAt(1), "^(\*|\d\.)\s+")
-			
+
 			; Get whole list item
 			if RegExMatch(Lines[1], "^\s+", Whitespace)
 			{
 				while (Lines[1] ~= "^" Whitespace)
 					Line .= "`r`n" SubStr(Lines.RemoveAt(1), 1+StrLen(Whitespace))
 			}
-			
+
 			; Parse the list item
 			Ctx.Replacement .= "[*]" ParseBlocks(Line)
 		}
 		Ctx.Replacement .= "[/list]"
 	}
 	Post := Ctx.Haystack
-	
+
 	Replacements :=
 	( LTrim Join Comments
 	[
@@ -232,10 +232,9 @@ ParseBlock(Post)
 	)
 	for k, v in Replacements
 		Post := RegExReplace(Post, v[1], v[2])
-	
-	Post := RegExReplace(Post, "^\R", "")
-	Post := RegExReplace(Post, "\R", " ")
-	Post := RegExReplace(Post, "<br>", "`r`n")
+		Post := RegExReplace(Post, "^\R", "")
+		Post := RegExReplace(Post, "\R", " ")
+		Post := RegExReplace(Post, "<br>", "`r`n")
 	return Post
 }
 
