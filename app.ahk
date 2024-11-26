@@ -19,8 +19,7 @@ neutron.Show()
 return
 
 
-fn_fieldChanged(neutron, event)
-{
+fn_fieldChanged(neutron, event) {
 	; formData := neutron.qs("#input").value
 	formData := event.target.value
 	neutron.doc.getElementById("ahk_output").innerText := Convert(formData)
@@ -41,42 +40,6 @@ FileInstall, gui\jquery.min.js, gui\jquery.min.js
 NeutronClose:
 ExitApp
 return
-
-
-Button(neutron, event)
-{
-	MsgBox, % "You clicked " event.target.innerText
-}
-
-submit(neutron, event)
-{
-	; form will redirect the page by default, but we want to handle the form data ourself.
-	event.preventDefault()
-
-	; Use Neutron's GetFormData method to process the form data into a form that
-	; is easily accessed. Fields that have a 'name' attribute will be keyed by
-	; that, or if they don't they'll be keyed by their 'id' attribute.
-	formData := neutron.GetFormData(event.target)
-
-	; You can access all of the form fields by iterating over the FormData
-	; object. It will go through them in the order they appear in the HTML.
-	; out := ""
-	; for name, value in formData
-	; 	out .= name ": " value "`n"
-	; out .= "`n"
-
-	out := ""
-	for name, value in formData
-		out .= value "`n"
-	out .= "`n"
-
-	; You can also get field values by name directly. Use object dot notation
-	; with the field name/id.
-	; out .= "Email: " formData.inputEmail "`n"
-
-	; Show the output
-	neutron.doc.getElementById("ahk_output").innerText := Convert(out)
-}
 
 
 
@@ -218,7 +181,7 @@ ParseBlock(Post)
 		["&sup2;", Chr(0xB2)],
 		["&sup3;", Chr(0xB3)],
 		["m)(?<!^|\[)\*(.+?)\*", "[i]$1[/i]"],
-		["m)^###\s*(.+)", "[size=125]$1[/size]"],
+		["m)^#{3,999}\s*(.+)", "<br>[size=125]$1[/size]"],
 		["m)^##\s*(.+)", "<br>[size=150]$1[/size]"],
 		["m)^#\s*(.+)", "<br><br>[size=200]$1[/size]"],
 		["<!-- spoiler -->", "[spoiler]"],

@@ -74,83 +74,31 @@
 
 		<!-- Page Content -->
 		<div class="flex-grow-1 overflow-auto">
-			<div class="tab-content container p-2" id="v-pills-tabContent">
-
+			<div class="tab-content container-fluid pl-4" id="v-pills-tabContent"> <!-- Added left padding to the content -->
 				<!-- v-pills-home -->
 				<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
 					<h1>Markdown to BBCode</h1>
-					<p>Input</p>
-					<form onsubmit="ahk.submit(event)" id="formdata1">
-						<div class="form-row">
-							<div class="form-group col-lg-12">
-								<textarea class="form-control" id="input" placeholder="" rows="20" onkeyup="ahk.fn_fieldChanged(event)"></textarea>
+					<form id="formdata1">
+						<div class="form-row no-gutters"> <!-- Remove gutters between columns -->
+							<!-- Column for input textarea -->
+							<div class="form-group col-lg-6">
+								<label for="input">Input</label>
+								<textarea class="form-control h-100" id="input" placeholder="" rows="20" onkeyup="ahk.fn_fieldChanged(event)"></textarea>
 							</div>
-							<div class="col-lg-12">
-								<p>Output</p>
-								<textarea class="form-control" id="ahk_output" placeholder="" rows="20"></textarea>
+							<!-- Column for output textarea -->
+							<div class="form-group col-lg-6">
+								<label for="ahk_output">Output</label>
+								<textarea class="form-control h-100" id="ahk_output" placeholder="" rows="20"></textarea>
 							</div>
 						</div>
-						<!-- <button type="submit" class="btn btn-primary">Convert to BBCode</button> -->
-						
 					</form>
 					<br>
-					
-					<!-- <p>
-						<span id="ahk_output"></span>
-					</p> -->
-					
 				</div>
-				
 				<!-- End v-pills-home -->
-
-				<!-- v-pills-buttons -->
-				<div class="tab-pane fade" id="v-pills-buttons" role="tabpanel" aria-labelledby="v-pills-buttons-tab">
-					<h1>Buttons!</h1>
-
-					<h2>Colored Buttons:</h2>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-primary">Primary</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-secondary">Secondary</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-success">Success</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-danger">Danger</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-warning">Warning</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-info">Info</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-light">Light</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-dark">Dark</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-link">Link</button>
-
-					<h2>Outline Buttons:</h2>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-outline-primary">Primary</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-outline-secondary">Secondary</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-outline-success">Success</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-outline-danger">Danger</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-outline-warning">Warning</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-outline-info">Info</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-outline-light">Light</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-outline-dark">Dark</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-outline-link">Link</button>
-
-					<h2>Block Buttons:</h2>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-block btn-primary">Block level
-						button</button>
-					<button type="button" onclick="ahk.Button(event)" class="btn btn-block btn-outline-primary">Block level
-						button</button>
-
-				</div>
-				<!-- End v-pills-buttons -->
-
-				<!-- v-pills-forms -->
-				<div class="tab-pane fade" id="v-pills-forms" role="tabpanel" aria-labelledby="v-pills-forms-tab">
-					<h1>Forms!</h1>
-					
-				</div>
-				<!-- End v-pills-forms -->
 			</div>
 		</div>
 		<!-- End Page Contents -->
-
 	</div>
 	<!-- End Window Contents -->
-
 </body>
-
 </html>
