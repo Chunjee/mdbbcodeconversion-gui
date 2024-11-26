@@ -1,10 +1,10 @@
 {
 	"name": "mdbbcodeconversion-gui",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "live markdown to bbcode conversion gui",
 	"main": "app.ahk",
 	"dependencies": {
-		"neutron.ahk": "^0.1.0"
+		"neutron.ahk": "chunjee/neutron.ahk"
 	},
 	"devDependencies": {},
 	"scripts": {
